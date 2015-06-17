@@ -1,0 +1,35 @@
+doctype html
+html
+  head
+    title Folio
+    
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet', href='//cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/pure-min.css')
+    link(rel='stylesheet', href='//cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/grids-responsive-min.css')
+    link(rel='stylesheet', href='static/css/style.css')
+    link(rel='shortcut icon', href='static/img/favicon.png', type='image/png')
+    
+    block afterhead
+
+  body
+  
+    header
+      a.folio
+        img(src='static/img/folio-white.svg', width='60', height='25')
+        
+      .pull-left
+      
+      .pull-right
+        button.pure-button.modal-toggle
+          img(src='static/img/button-add.svg', width='60', height='60')
+    
+    section#chart
+      .container
+        p CHART
+
+    block app
+    
+    script(src='//javaspritz.com/cdn/dom.polyfill.min.js')
+    script(src='static/js/main.js')
+    block scripts

@@ -1,0 +1,281 @@
+@import ('nib')
+@import url('//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700')
+
+_accent = #097ce7
+_darken = #0048a2
+_lighten = #6dc5dd
+
+_green = #52d888
+_red = #f33454
+
+.sans-font
+  font-family 'Open Sans', sans-serif
+
+.pure-g [class *='pure-u'],
+.pure-g-r [class*="pure-u"]
+  @extends .sans-font
+
+html,
+body
+  width 100%
+  height 100%
+  @extends .sans-font
+
+.pure-form
+  input[type='text'], input[type='password'], input[type='email'], input[type='url'], input[type='date'], input[type='month'], input[type='time'], input[type='datetime'], input[type='datetime-local'], input[type='week'], input[type='number'], input[type='search'], input[type='tel'], input[type='color'], select, textarea
+    @extends .sans-font
+    background #EEE
+    border none
+    border-radius 0
+    box-shadow none
+    width 100%
+    padding 17px 15px
+    font-size 16px
+    font-weight 300
+  button
+    @extends .sans-font
+    background #EEE
+    border none
+    border-radius 0
+    box-shadow none
+    width 100%
+    padding 17px 15px
+    font-size 16px
+    font-weight 700
+    text-transform uppercase
+    
+
+.pure-button
+  @extends .sans-font
+  box-shadow none !important
+  transition all 0.5s ease
+  
+h1, h2, h3,
+h4, h5, h6
+  font-weight 400
+
+_spacer = 5, 10, 20, 40, 60, 80, 100, 150
+
+for _val in _spacer
+  .spacer-{ _val }
+    height ( _val * 1px )
+
+.text-left
+  text-align left
+.text-center
+  text-align center
+.text-right
+  text-align right
+
+.pull-left
+  float left
+.pull-right
+  float right
+  
+.page
+  width 100%
+  height auto
+
+.container
+  max-width 960px
+  margin 0 auto
+  padding 0 20px
+  
+header
+  height 60px
+  background _accent
+  color #FFF
+  overflow hidden
+  
+  h1
+    margin 0
+    line-height 40px
+    padding 10px 20px
+    font-size 18px
+    font-weight 600
+  
+  a.folio
+    cursor pointer
+    display block
+    width 60px
+    height 25px
+    position absolute
+    top 15px
+    left 50%
+    margin-left -(@width / 2)
+    img
+      display block
+      width @width
+      height @height
+  .pure-button
+    background none !important
+    padding 0
+    margin 0
+    height @height
+    &:hover
+      background lighten(_accent, 10%) !important
+
+section#chart
+  background _darken
+  padding 40px 0
+
+section#table
+  table.pure-table
+    width 100%
+    border none
+    thead
+      background none
+      tr
+        th
+          background none
+          border none
+          font-size 13px
+          font-weight 600
+          text-align left
+          text-transform uppercase
+          padding 15px 0
+
+    tbody
+      tr
+        td
+          border none
+          border-bottom 1px solid #EEE
+          padding 15px 0
+          &.date
+            font-size 13px
+            color #999
+          span.client
+            background #F2F2F2
+            border-radius 3px
+            padding 5px 10px
+            display inline-block
+            margin 5px 10px 5px 0
+            cursor pointer
+            transition all 0.3s ease
+            &:hover,
+            &.selected
+              background _accent
+              color #FFF
+        &:last-child
+          td
+            border none
+            
+    .switch
+      background _red
+      transition background 0.5s ease
+      height 18px
+      border-radius (@height / 2)
+      width 60px
+      cursor pointer
+      
+      .switch-container
+        margin 0 12px
+        position relative
+        
+      span
+        display block
+        height (@height - 4px)
+        width 20px
+        background #FFF
+        border-radius (@height / 2)
+        position absolute
+        top 2px
+        left 0
+        transform translate(-50%, 0)
+        transition all 0.3s ease
+        
+      &:hover
+        background darken(@background, 10%)
+        span
+          left 20%
+        
+      &.billed
+        background _green
+        span
+          left 100%
+        &:hover
+          background darken(@background, 10%)
+          span
+            left 80%
+
+section#modal
+  position fixed
+  z-index 10
+  top 0
+  left 0
+  right 0
+  bottom 0
+  background rgba(_darken, 0.9)
+  
+  transition opacity 0.5s ease
+  
+  display none
+  opacity 0
+  &.visible
+    display block
+  &.fadein
+    opacity 1
+  
+  .modal
+    width 100%
+    max-width 640px
+    background #FFF
+    position absolute
+    top 50%
+    left 50%
+    transform translate(-50%, -50%)
+  
+  .modal-body
+    padding 10px
+    .padding
+      padding 10px
+    button
+      background _green
+      color #FFF
+
+  #datepicker
+    .date-header
+      background _lighten
+      color #FFF
+      text-align center
+      padding 20px
+      span.current
+        display block
+        font-size 16px
+        overflow hidden
+        white-space nowrap
+        text-overflow ellipsis
+      span.year
+        display inline-block
+        font-size 13px
+        background darken(_lighten, 20%)
+        padding 4px 15px 5px 15px
+        border-radius 20px
+    .date-body
+      background #F2F2F2
+      padding 2px 10px 10px 10px
+      table
+        width 100%
+        table-layout fixed
+        text-align center
+        thead
+          tr
+            th
+              font-size 10px
+              font-weight 600
+              text-transform uppercase
+              color #999
+              padding 10px 0
+        tbody
+          tr
+            td
+              padding 5px 0
+              font-size 13px
+              color #666
+              cursor pointer
+              &.no
+                opacity 0.5
+              &.selected
+                color #000
+                font-weight 600
+  

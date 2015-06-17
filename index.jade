@@ -1,0 +1,145 @@
+extends layout
+
+block app
+  section#table
+    .container
+      .spacer-40
+      
+      table.pure-table
+        thead
+          tr
+            th Date
+            th Title
+            th Customer
+            th Expense
+            th Billed
+        tbody
+          tr
+            td.date 17 June 
+            td New PC
+            td
+              span.client Plastic Panda
+            td € 540,00
+            td
+              .switch
+                .switch-container
+                  span
+          tr
+            td.date 15 June 
+            td Amazon AWS
+            td
+              span.client GSO
+              span.client Butterfly
+            td € 134,00
+            td
+              .switch
+                .switch-container
+                  span
+          tr
+            td.date 15 May 
+            td PC for Tools
+            td
+              span.client UTilia
+            td € 551,00
+            td
+              .switch.billed
+                .switch-container
+                  span
+            
+      
+      .spacer-40
+      
+  section#modal
+    .modal
+      header.modal-header
+      
+        .pull-left
+          h1 Add expense
+          
+        .pull-right
+          button.pure-button.modal-toggle
+            img(src='static/img/button-close.svg', width='60', height='60')
+            
+      .modal-body
+        form.pure-form()
+          .pure-g
+            .pure-u-1.pure-u-sm-2-5
+              .padding
+                #datepicker
+                  .date-header
+                    span.current Friday, June 12
+                    .spacer-10
+                    span.year 2015
+                  .date-body
+                    table
+                      thead
+                        tr
+                          th Mon
+                          th Tue
+                          th Wed
+                          th Thu
+                          th Fri
+                          th Sat
+                          th Sun
+                      tbody
+                        tr
+                          td 1
+                          td 2
+                          td 3
+                          td 4
+                          td 5
+                          td 6
+                          td 7
+                        tr
+                          td 8
+                          td 9
+                          td 10
+                          td 11
+                          td 12
+                          td 13
+                          td 14
+                        tr
+                          td 15
+                          td 16
+                          td 17
+                          td.selected 18
+                          td 19
+                          td 20
+                          td 21
+                        tr
+                          td 22
+                          td 23
+                          td 24
+                          td 25
+                          td 26
+                          td 27
+                          td 28
+                        tr
+                          td 29
+                          td 30
+                          td.no 1
+                          td.no 2
+                          td.no 3
+                          td.no 4
+                          td.no 5
+                    
+            .pure-u-1.pure-u-sm-3-5
+              .padding
+                input(type='text', placeholder='Customers')
+                .spacer-20
+                input(type='text', placeholder='Title')
+                .spacer-20
+                input(type='text', placeholder='Expense')
+                .spacer-20
+                button(type='submit')
+                  span Add to list
+
+block scripts
+  script.
+    (function () {
+      
+      document.querySelectorAll('#table .switch').on('click', function () {
+        this.classList.toggle('billed');  
+      });
+      
+    })();
