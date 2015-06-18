@@ -28,23 +28,23 @@ body
     @extends .sans-font
     background #EEE
     border none
-    border-radius 0
+    border-radius 5px
     box-shadow none
     width 100%
-    padding 17px 15px
+    padding 12px 15px
     margin 0
-    font-size 16px
-    font-weight 300
+    font-size 14px
+    font-weight 400
   button
     @extends .sans-font
     background #EEE
     border none
-    border-radius 0
+    border-radius 5px
     box-shadow none
     width 100%
-    padding 17px 15px
+    padding 12px 15px
     margin 0
-    font-size 16px
+    font-size 14px
     font-weight 700
     text-transform uppercase
     &.primary
@@ -179,14 +179,30 @@ section#chart
 
   
 section#login
-  padding 40px 0
+  position relative
+  .dark-background
+    background _darken
+    position absolute
+    top 0
+    left 0
+    right 0
+    height 200px
+    z-index -1
   .container
     padding 0 10px
   .padding
     padding 10px
+  .container
+    padding-top 80px
   form.pure-form
-    margin 0
+    margin 0 auto
     padding 0
+    background #FFF
+    box-shadow 0 0 10px 2px rgba(#000, 0.1)
+    max-width 100%
+    width 380px
+    fieldset
+      padding 30px
 
 section#table
   
@@ -376,7 +392,8 @@ section#modal
               &.selected
                 color #000
                 font-weight 600
-  
+
+                
 @media all and (max-width: 480px)
   section#table
     table.pure-table
@@ -409,3 +426,11 @@ section#modal
       transform none
       overflow-y auto
       overflow-scrolling touch
+
+  section#login
+    .container
+      padding-left 0
+      padding-right 0
+    form.pure-form
+      fieldset
+        padding 20px

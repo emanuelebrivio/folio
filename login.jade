@@ -3,19 +3,26 @@ extends layout
 block app
     
   section#login
+    .dark-background
     .container
       form.pure-form(action='/index.html', method='post')
-        .pure-g
-          .pure-u-1.pure-u-sm-2-5
-            .padding
-              input(type='email', placeholder='Email Address', value='emanuele@plasticpanda.com')
-          .pure-u-1.pure-u-sm-2-5
-            .padding
-              input(type='password', placeholder='Password', value='passdry')
-          .pure-u-1.pure-u-sm-1-5
-            .padding
-              button.primary(type='submit')
-                span Login
+        fieldset
+          .pure-g
+            .pure-u-1
+              .padding
+                input(type='email', placeholder='Email Address', value='emanuele@plasticpanda.com')
+            .pure-u-1
+              .padding
+                input(type='password', placeholder='Password', value='passdry')
+            .pure-u-1
+              .padding
+                button.primary(type='submit')
+                  span Login
+  footer
+    .spacer-40
+    .text-center
+      img(src='static/img/panda-logo.svg', width='130')
+    .spacer-40
   
 
 block scripts
