@@ -126,6 +126,58 @@ section#chart
   background _darken
   padding 40px 0
   
+  .ct-chart
+    &.ct-area
+      height 240px
+    .ct-area
+      fill-opacity 1
+
+    .ct-label
+      @extends .sans-font
+      text-transform uppercase
+      font-size 9px
+      font-weight 600
+      fill #FFF
+      color #FFF
+
+    .ct-grid
+      stroke rgba(255,255,255,.2)
+    
+  .ct-summary
+    font-weight 600
+    color #FFF
+    font-size 13px
+    text-transform uppercase
+    text-align center
+
+  .ct-legends
+    color #FFF
+    font-size 12px
+    font-weight 600
+    span
+      margin-right 20px
+      &:last-child
+        margin-right 0
+    
+  .ct-legend
+    display inline-block
+    width 10px
+    height 10px
+    border-radius 3px
+    margin-right 10px
+
+  .ct-chart .ct-series.ct-series-a .ct-area,
+  .ct-legend-0
+    fill #2e76e2
+    background #2e76e2
+
+  .ct-chart .ct-series.ct-series-b .ct-area,
+  .ct-legend-1
+    fill #36a8ff
+    background #36a8ff
+
+
+  
 section#login
   padding 40px 0
   .container

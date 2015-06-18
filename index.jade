@@ -1,5 +1,8 @@
 extends layout
 
+block afterhead
+  link(rel='stylesheet', type='text/css', href='//cdnjs.cloudflare.com/ajax/libs/chartist/0.8.0/chartist.min.css')
+
 block menuleft
   button.pure-button
     img(src='static/img/button-logout.svg', width='60', height='60')
@@ -12,8 +15,15 @@ block app
     
   section#chart
     .container
-      p CHART
-
+      .ct-summary
+        p: strong Expense Summary
+      .ct-chart.ct-area
+      .spacer-20
+      .ct-legends.text-center
+        .ct-legend.ct-legend-0
+        span Total expense
+        .ct-legend.ct-legend-1
+        span Billed
 
   section#table
     .container
@@ -43,7 +53,7 @@ block app
               span.client(data-cli='Plastic Panda') Plastic Panda
             td € 540,00
             td
-              .switch
+              .switch(data-id='1')
                 .switch-container
                   span
           tr
@@ -55,7 +65,7 @@ block app
               span.client(data-cli='Butterfly') Butterfly
             td € 134,00
             td
-              .switch
+              .switch(data-id='2')
                 .switch-container
                   span
           tr
@@ -65,7 +75,7 @@ block app
               span.client(data-cli='UTilia') UTilia
             td € 551,00
             td
-              .switch.billed
+              .switch.billed(data-id='3')
                 .switch-container
                   span
             
@@ -158,11 +168,15 @@ block app
                   span Add to list
 
 block scripts
+  script(src='//cdnjs.cloudflare.com/ajax/libs/chartist/0.8.0/chartist.min.js')
   script.
     (function () {
     
       document.querySelectorAll('#table .switch').on('click', function () {
-        this.classList.toggle('billed');  
+        this.classList.toggle('billed');
+        
+        console.log('AJAX request to set new BilledStatus for #' + this.getAttribute('data-id'), this.classList.contains('billed'));
+        
       });
       
       var modalToggle = document.querySelectorAll('.modal-toggle');
@@ -239,6 +253,29 @@ block scripts
         }
       
       };
+      
+      
+      new Chartist.Line('.ct-chart.ct-area', {
+        labels: ['Apr', 'May', 'Jun'],
+        series: [
+          ['500', '212', '334'],
+          ['500', '50', '0']
+        ]
+      }, {
+        low: 0,
+        showArea: true,
+        showLine: false,
+        showPoint: false,
+        fullWidth: true,
+        lineSmooth: Chartist.Interpolation.simple({
+          divisor: 20
+        }),
+        axisY: {
+          labelInterpolationFnc: function (value) {
+            return '€ ' + value;
+          }
+        }
+      });
       
       
     })();
