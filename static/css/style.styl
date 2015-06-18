@@ -179,10 +179,14 @@ section#table
 
     tbody
       tr
+        &.fadeout
+          td
+            opacity 0.3
         td
           border none
           border-bottom 1px solid #EEE
           padding 15px 0
+          transition opacity 0.5s ease
           &.date
             font-size 13px
             color #999

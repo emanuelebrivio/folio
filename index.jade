@@ -19,12 +19,12 @@ block app
     .container
       .spacer-40
       
-      .table-filters.text-right
+      //-.table-filters.text-right
         p
           span View
-          a#view-all.table-filter.table-filter-selected(title='View all')
+          a#view-all.table-filter(title='View all')
             img(src='static/img/button-viewall.svg', width='31', height='31')
-          a#view-selectedonly.table-filter(title='View only selected customers')
+          a#view-selectedonly.table-filter.table-filter-selected(title='View only selected customers')
             img(src='static/img/button-viewonly.svg', width='31', height='31')
       
       table.pure-table
@@ -193,7 +193,7 @@ block scripts
       if (clients) {
       
         clients.on('click', function (e) {
-          var ctrlKey = e.ctrlKey;
+          var ctrlKey = e.ctrlKey || e.shiftKey;
           var me = this.getAttribute('data-cli');
           var wasSelected = this.classList.contains('selected');  
           
@@ -222,35 +222,23 @@ block scripts
       
       var filterTable = function () {
       
-        if (document.getElementById('view-selectedonly').classList.contains('table-filter-selected')) {
+        if (document.querySelectorAll('#table tbody tr .selected').length > 0) {
           document.querySelectorAll('#table tbody tr').forEach(function (tr) {
 
             if (tr.querySelectorAll('.client.selected').length === 0) {
-              tr.style.display = 'none';
+              tr.classList.add('fadeout');
             } else {
-              tr.style.display = '';
+              tr.classList.remove('fadeout');
             }
 
           });
         } else {
           document.querySelectorAll('#table tbody tr').forEach(function (tr) {
-            tr.style.display = '';
+            tr.classList.remove('fadeout');
           });
         }
       
       };
-      
-      
-      document.querySelectorAll('.table-filter').on('click', function (e) {
-        e.preventDefault();
-        
-        document.querySelector('.table-filter-selected').classList.remove('table-filter-selected');
-        this.classList.add('table-filter-selected');
-        
-        filterTable();
-        
-      });
-      
       
       
     })();
