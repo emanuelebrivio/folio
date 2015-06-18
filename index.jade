@@ -271,7 +271,11 @@ block scripts
         lineSmooth: Chartist.Interpolation.simple({
           divisor: 20
         }),
+        axisX: {
+          showGrid: false
+        },
         axisY: {
+          showLabel: false,
           labelInterpolationFnc: function (value) {
             return '€ ' + value;
           }
