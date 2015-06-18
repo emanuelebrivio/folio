@@ -176,6 +176,7 @@ block scripts
         this.classList.toggle('billed');
         
         console.log('AJAX request to set new BilledStatus for #' + this.getAttribute('data-id'), this.classList.contains('billed'));
+        console.log('Need also to refresh Chart data');
         
       });
       
@@ -256,10 +257,10 @@ block scripts
       
       
       new Chartist.Line('.ct-chart.ct-area', {
-        labels: ['Apr', 'May', 'Jun'],
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
         series: [
-          ['500', '212', '334'],
-          ['500', '50', '0']
+          ['470', '870', '52', '500', '212', '334'],
+          ['470', '690', '52', '500', '50', '0']
         ]
       }, {
         low: 0,
