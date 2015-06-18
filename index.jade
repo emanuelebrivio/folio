@@ -1,24 +1,46 @@
 extends layout
 
+block menuleft
+  button.pure-button
+    img(src='static/img/button-logout.svg', width='60', height='60')
+
+block menuright
+  button.pure-button.modal-toggle
+    img(src='static/img/button-add.svg', width='60', height='60')
+
 block app
+    
+  section#chart
+    .container
+      p CHART
+
+
   section#table
     .container
       .spacer-40
       
+      .table-filters.text-right
+        p
+          span View
+          a#view-all.table-filter.table-filter-selected(title='View all')
+            img(src='static/img/button-viewall.svg', width='31', height='31')
+          a#view-selectedonly.table-filter(title='View only selected customers')
+            img(src='static/img/button-viewonly.svg', width='31', height='31')
+      
       table.pure-table
         thead
           tr
-            th Date
+            th(style='width: 100px;') Date
             th Title
             th Customer
-            th Expense
-            th Billed
+            th(style='width: 150px;') Expense
+            th(style='width: 80px;') Billed
         tbody
           tr
             td.date 17 June 
             td New PC
             td
-              span.client Plastic Panda
+              span.client(data-cli='Plastic Panda') Plastic Panda
             td € 540,00
             td
               .switch
@@ -28,8 +50,9 @@ block app
             td.date 15 June 
             td Amazon AWS
             td
-              span.client GSO
-              span.client Butterfly
+              span.client(data-cli='GSO') GSO
+              span.client(data-cli='UTilia') UTilia
+              span.client(data-cli='Butterfly') Butterfly
             td € 134,00
             td
               .switch
@@ -39,7 +62,7 @@ block app
             td.date 15 May 
             td PC for Tools
             td
-              span.client UTilia
+              span.client(data-cli='UTilia') UTilia
             td € 551,00
             td
               .switch.billed
@@ -131,15 +154,103 @@ block app
                 .spacer-20
                 input(type='text', placeholder='Expense')
                 .spacer-20
-                button(type='submit')
+                button.primary(type='submit')
                   span Add to list
 
 block scripts
   script.
     (function () {
-      
+    
       document.querySelectorAll('#table .switch').on('click', function () {
         this.classList.toggle('billed');  
       });
+      
+      var modalToggle = document.querySelectorAll('.modal-toggle');
+      
+      if (modalToggle) {
+        modalToggle.on('click', function () {
+        
+          var dataModal = this.getAttribute('data-modal');
+          var modal = document.getElementById('modal');
+          
+          if (dataModal === 'open' || !modal.classList.contains('visible')) {
+            modal.classList.add('visible');
+            setTimeout(function () {
+              modal.classList.add('fadein');
+            }, 5);
+          } else if (dataModal === 'close' || modal.classList.contains('visible')) {
+            modal.classList.remove('fadein');
+            setTimeout(function () {
+              modal.classList.remove('visible');
+            }, 500);
+          }
+          
+        });
+      }
+      
+      
+      var clients = document.querySelectorAll('#table .client');
+      if (clients) {
+      
+        clients.on('click', function (e) {
+          var ctrlKey = e.ctrlKey;
+          var me = this.getAttribute('data-cli');
+          var wasSelected = this.classList.contains('selected');  
+          
+          if (!ctrlKey) {
+            document.querySelectorAll('#table .client.selected').forEach(function (c) {
+              c.classList.remove('selected');
+            });
+          }
+          
+          if (!wasSelected) {
+            document.querySelectorAll('#table .client[data-cli="' + me + '"]').forEach(function (c) {
+              c.classList.add('selected');
+            });
+          } else if (ctrlKey) {
+            document.querySelectorAll('#table .client[data-cli="' + me + '"]').forEach(function (c) {
+              c.classList.remove('selected');
+            });
+          }
+          
+          filterTable();
+          
+        });
+      
+      }
+      
+      
+      var filterTable = function () {
+      
+        if (document.getElementById('view-selectedonly').classList.contains('table-filter-selected')) {
+          document.querySelectorAll('#table tbody tr').forEach(function (tr) {
+
+            if (tr.querySelectorAll('.client.selected').length === 0) {
+              tr.style.display = 'none';
+            } else {
+              tr.style.display = '';
+            }
+
+          });
+        } else {
+          document.querySelectorAll('#table tbody tr').forEach(function (tr) {
+            tr.style.display = '';
+          });
+        }
+      
+      };
+      
+      
+      document.querySelectorAll('.table-filter').on('click', function (e) {
+        e.preventDefault();
+        
+        document.querySelector('.table-filter-selected').classList.remove('table-filter-selected');
+        this.classList.add('table-filter-selected');
+        
+        filterTable();
+        
+      });
+      
+      
       
     })();

@@ -8,7 +8,7 @@ html
     link(rel='stylesheet', href='//cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/pure-min.css')
     link(rel='stylesheet', href='//cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/grids-responsive-min.css')
     link(rel='stylesheet', href='static/css/style.css')
-    link(rel='shortcut icon', href='static/img/favicon.png', type='image/png')
+    link(rel='shortcut icon', href='static/img/folio-favicon.png', type='image/png')
     
     block afterhead
 
@@ -19,14 +19,10 @@ html
         img(src='static/img/folio-white.svg', width='60', height='25')
         
       .pull-left
+        block menuleft
       
       .pull-right
-        button.pure-button.modal-toggle
-          img(src='static/img/button-add.svg', width='60', height='60')
-    
-    section#chart
-      .container
-        p CHART
+        block menuright
 
     block app
     

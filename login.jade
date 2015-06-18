@@ -1,0 +1,27 @@
+extends layout
+
+block app
+    
+  section#login
+    .container
+      form.pure-form(action='/index.html', method='post')
+        .pure-g
+          .pure-u-1.pure-u-sm-2-5
+            .padding
+              input(type='email', placeholder='Email Address', value='emanuele@plasticpanda.com')
+          .pure-u-1.pure-u-sm-2-5
+            .padding
+              input(type='password', placeholder='Password', value='passdry')
+          .pure-u-1.pure-u-sm-1-5
+            .padding
+              button.primary(type='submit')
+                span Login
+  
+
+block scripts
+  script.
+    (function () {
+    
+      'use strict';
+      
+    })();

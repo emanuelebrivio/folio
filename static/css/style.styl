@@ -22,6 +22,8 @@ body
   @extends .sans-font
 
 .pure-form
+  margin 0
+  padding 0
   input[type='text'], input[type='password'], input[type='email'], input[type='url'], input[type='date'], input[type='month'], input[type='time'], input[type='datetime'], input[type='datetime-local'], input[type='week'], input[type='number'], input[type='search'], input[type='tel'], input[type='color'], select, textarea
     @extends .sans-font
     background #EEE
@@ -30,6 +32,7 @@ body
     box-shadow none
     width 100%
     padding 17px 15px
+    margin 0
     font-size 16px
     font-weight 300
   button
@@ -40,9 +43,13 @@ body
     box-shadow none
     width 100%
     padding 17px 15px
+    margin 0
     font-size 16px
     font-weight 700
     text-transform uppercase
+    &.primary
+      background _green
+      color #FFF
     
 
 .pure-button
@@ -118,8 +125,43 @@ header
 section#chart
   background _darken
   padding 40px 0
+  
+section#login
+  padding 40px 0
+  .container
+    padding 0 10px
+  .padding
+    padding 10px
+  form.pure-form
+    margin 0
+    padding 0
 
 section#table
+  
+  .table-filters
+    
+    border-bottom 2px solid #EEE
+    margin-bottom 20px
+    
+    p
+      & > *
+        display inline-block
+        vertical-align middle
+      span
+        font-size 11px
+        font-weight 600
+        color #AAA
+        margin-right 10px
+    
+    .table-filter
+      opacity 0.4
+      transition opacity 0.3s ease
+      cursor pointer
+      &:hover
+        opacity 0.7
+      &.table-filter-selected
+        opacity 1
+  
   table.pure-table
     width 100%
     border none
@@ -152,6 +194,9 @@ section#table
             margin 5px 10px 5px 0
             cursor pointer
             transition all 0.3s ease
+            user-select none
+            font-size 14px
+            font-weight 600
             &:hover,
             &.selected
               background _accent
@@ -229,9 +274,6 @@ section#modal
     padding 10px
     .padding
       padding 10px
-    button
-      background _green
-      color #FFF
 
   #datepicker
     .date-header
