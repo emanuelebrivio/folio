@@ -95,77 +95,19 @@ block app
             
       .modal-body
         form.pure-form()
-          .pure-g
-            .pure-u-1.pure-u-sm-2-5
-              .padding
-                #datepicker
-                  .date-header
-                    span.current Friday, June 12
-                    .spacer-10
-                    span.year 2015
-                  .date-body
-                    table
-                      thead
-                        tr
-                          th Mon
-                          th Tue
-                          th Wed
-                          th Thu
-                          th Fri
-                          th Sat
-                          th Sun
-                      tbody
-                        tr
-                          td 1
-                          td 2
-                          td 3
-                          td 4
-                          td 5
-                          td 6
-                          td 7
-                        tr
-                          td 8
-                          td 9
-                          td 10
-                          td 11
-                          td 12
-                          td 13
-                          td 14
-                        tr
-                          td 15
-                          td 16
-                          td 17
-                          td.selected 18
-                          td 19
-                          td 20
-                          td 21
-                        tr
-                          td 22
-                          td 23
-                          td 24
-                          td 25
-                          td 26
-                          td 27
-                          td 28
-                        tr
-                          td 29
-                          td 30
-                          td.no 1
-                          td.no 2
-                          td.no 3
-                          td.no 4
-                          td.no 5
+          .padding
+            input#datepicker-input(type='hidden', name='date')
+            #datepicker
                     
-            .pure-u-1.pure-u-sm-3-5
-              .padding
-                input(type='text', placeholder='Customers')
-                .spacer-20
-                input(type='text', placeholder='Title')
-                .spacer-20
-                input(type='text', placeholder='Expense')
-                .spacer-20
-                button.primary(type='submit')
-                  span Add to list
+          .padding
+            input(type='text', name='customers', placeholder='Customers')
+            .spacer-20
+            input(type='text', name='title', placeholder='Title')
+            .spacer-20
+            input(type='text', name='expense', placeholder='Expense')
+            .spacer-20
+            button.primary(type='submit')
+              span Add to list
 
 block scripts
   script(src='//cdnjs.cloudflare.com/ajax/libs/chartist/0.8.0/chartist.min.js')
@@ -282,6 +224,20 @@ block scripts
           }
         }
       });
+      
+      
+      
+      var dateInput = document.getElementById('datepicker-input');
+      var datePicker = new Pikaday({
+        field: document.getElementById('datepicker'),
+        container: document.getElementById('datepicker'),
+        //format: 'dddd, DD MMMM YYYY',
+        onSelect: function(date) {
+            dateInput.value = datePicker.toString();
+        },
+      });
+      datePicker.hide = function() {/*noop*/}
+      datePicker.show();
       
       
     })();

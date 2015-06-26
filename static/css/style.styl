@@ -26,7 +26,7 @@ body
   padding 0
   input[type='text'], input[type='password'], input[type='email'], input[type='url'], input[type='date'], input[type='month'], input[type='time'], input[type='datetime'], input[type='datetime-local'], input[type='week'], input[type='number'], input[type='search'], input[type='tel'], input[type='color'], select, textarea
     @extends .sans-font
-    background #EEE
+    background #F2F2F2
     border none
     border-radius 5px
     box-shadow none
@@ -337,12 +337,16 @@ section#modal
   
   .modal
     width 100%
-    max-width 640px
+    max-width 480px
     background #FFF
     position absolute
     top 50%
     left 50%
     transform translate(-50%, -50%)
+    
+    max-height 100%
+    overflow-y auto
+    overflow-scrolling touch
   
   .modal-body
     padding 10px
@@ -350,51 +354,97 @@ section#modal
       padding 10px
 
   #datepicker
-    .date-header
-      background _lighten
-      color #FFF
+    .pika-title
+      background _accent
       text-align center
+      color #FFF
       padding 20px
-      span.current
-        display block
-        font-size 16px
-        overflow hidden
-        white-space nowrap
-        text-overflow ellipsis
-      span.year
-        display inline-block
-        font-size 13px
-        background darken(_lighten, 20%)
-        padding 4px 15px 5px 15px
-        border-radius 20px
-    .date-body
-      background #F2F2F2
-      padding 2px 10px 10px 10px
-      table
-        width 100%
-        table-layout fixed
-        text-align center
-        thead
-          tr
-            th
-              font-size 10px
-              font-weight 600
-              text-transform uppercase
-              color #999
-              padding 10px 0
-        tbody
-          tr
-            td
-              padding 5px 0
-              font-size 13px
-              color #666
-              cursor pointer
-              &.no
-                opacity 0.5
-              &.selected
-                color #000
-                font-weight 600
+      position relative
+      select
+        display none
+      .pika-label
+        &:nth-child(1)
+          display block
+          font-size 16px
+          overflow hidden
+          white-space nowrap
+          text-overflow ellipsis
+          margin-bottom 10px
+        &:nth-child(2)
+          display inline-block
+          font-size 13px
+          background lighten(@background, 30%)
+          padding 4px 15px 5px 15px
+          border-radius 20px
 
+      .pika-prev,
+      .pika-next
+        position absolute
+        z-index 2
+        top 50%
+        width 16px
+        height @width
+        margin-top -(@width / 2)
+        cursor pointer
+        opacity 0.7
+        transition opacity 0.5s ease
+        background none
+        background-position center
+        background-repeat no-repeat
+        background-size @width @height
+        text-indent -9999px
+        color transparent
+        
+        &:hover
+          opacity 1
+        &.pika-next
+          right 10px
+          background-image url('../img/date-navigation-next.svg')
+        &.pika-prev
+          left 10px
+          background-image url('../img/date-navigation-prev.svg')
+      
+    .pika-table
+      width 100%
+      table-layout fixed
+      text-align center
+      background #F2F2F2
+      thead
+        tr
+          th
+            font-size 10px
+            font-weight 600
+            text-transform uppercase
+            color #999
+            padding 5px 0
+      tbody
+        tr
+          td
+            font-size 13px
+            cursor pointer
+            
+            button
+              background none
+              padding 7px 0
+              color #333
+              font-weight 400
+            
+            &[data-day='5'],
+            &[data-day='6']
+              button
+                color #666
+              
+            &:hover
+              background #FFF
+            &.is-empty
+              background none !important
+              cursor default
+            &.is-selected
+              background #AAA
+              button
+                color #FFF
+                font-weight 600
+                
                 
 @media all and (max-width: 500px)
   section#table
@@ -426,8 +476,12 @@ section#modal
       right 0
       bottom 0
       transform none
-      overflow-y auto
-      overflow-scrolling touch
+    #datepicker
+      .pure-g
+        & > div
+          width 100%
+          &:last-child
+            height 100px
 
   section#login
     .container
