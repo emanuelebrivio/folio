@@ -36,16 +36,8 @@ block app
             img(src='static/img/button-viewall.svg', width='31', height='31')
           a#view-selectedonly.table-filter.table-filter-selected(title='View only selected customers')
             img(src='static/img/button-viewonly.svg', width='31', height='31')
-      
-      table.pure-table
-        thead
-          tr
-            th(style='width: 80px;') Date
-            th Title
-            th(style='width: 250px;') Customer
-            th(style='width: 120px;') Expense
-            th(style='width: 60px;') Billed
-        tbody
+      projects
+        //-
           tr
             td.date 17 Jun 
             td New PC
@@ -78,10 +70,8 @@ block app
               .switch.billed(data-id='3')
                 .switch-container
                   span
-            
-      
       .spacer-40
-      
+
   section#modal
     .modal
       header.modal-header
@@ -110,6 +100,38 @@ block app
               span Add to list
 
 block scripts
+  script(src='tags/projects.js', type='riot/tag')
+  script.
+    riot.mount(
+      'projects', 
+      { 
+        items: [ 
+          {
+            id: 1,
+            date: new Date(),
+            title: 'New PC',
+            customers: [
+              {name: 'Plastic Panda' }
+            ],
+            expense: 540.00,
+            billed: true
+          }, 
+          {
+            id: 2,
+            date: new Date(),
+            title: 'New Site',
+            customers: [
+              {name: 'UTilia HR'},
+              {name: 'Hitrea'}
+            ],
+            expense: 540.00,
+            billed: false
+          }
+        ] 
+      }
+    );
+
+
   script(src='//cdnjs.cloudflare.com/ajax/libs/chartist/0.8.0/chartist.min.js')
   script.
     (function () {
@@ -146,6 +168,7 @@ block scripts
       }
       
       
+      /*
       var clients = document.querySelectorAll('#table .client');
       if (clients) {
       
@@ -196,6 +219,7 @@ block scripts
         }
       
       };
+      */
       
       
       new Chartist.Line('.ct-chart.ct-area', {
