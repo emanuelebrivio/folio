@@ -2,15 +2,20 @@ calendar
   div.pikaday(name='datepicker')
 
   script.
-    var datePicker = new Pikaday({
+    this.pikaday = new Pikaday({
       field: this.datepicker,
       container: this.datepicker,
       format: 'dddd, DD MMMM YYYY'
     });
-    
-    datePicker.hide = function() {}
-    datePicker.show();
+
+    this.pikaday.hide = function() {}
+    this.pikaday.show();
     
     getDate() {
-      return datePicker.toString();
+      return this.pikaday.toString();
     }
+    
+    reset() {
+      this.pikaday.setDate(null);
+    }
+    

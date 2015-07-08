@@ -40,6 +40,7 @@ modal
         setTimeout(function () {
           _this.visibility = false;
           _this.update();
+          _this.reset();
         }, 500);
         
       } else {
@@ -54,7 +55,14 @@ modal
       }
     }
     
-    add(e) {    
+    reset() {
+      this.title.value = '';
+      this.customers.value = '';
+      this.expense.value = '';
+      this.tags.calendar.reset();
+    }
+    
+    add() {    
       var toadd = {
         id: new Date(),
         date: this.tags.calendar.getDate(),

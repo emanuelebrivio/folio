@@ -26,7 +26,7 @@ folio
     .container
       .spacer-40
       
-      table.pure-table
+      table.pure-table(if='{ hasprojects }')
         thead
           tr
             th(style='width: 80px;') Date
@@ -36,6 +36,9 @@ folio
             th(style='width: 60px;') Billed
 
         tbody(riot-tag='projects', items='{projectslist}')
+      
+      div(if='{ !hasprojects }')
+        p You have not added any expense yet
 
       .spacer-40
   
@@ -63,3 +66,7 @@ folio
         expense: 540.00,
         billed: false
       }];
+    
+    this.on('update', function () {
+      this.hasprojects = this.projectslist.length > 0;
+    });
