@@ -116,7 +116,7 @@ riot.tag('projects', '<tr each="{ projects }"> <td class="date">{ moment(date).f
   
 });
 
-riot.tag('tagselect', '<ul> <li each="{customers}" class="tag"><span>{name}</span></li> <li> <input type="text" name="newtag" placeholder="eg: Plastic Panda" class="awesomplete"> </li> </ul>', function(opts) {
+riot.tag('tagselect', '<ul> <li each="{customers}" class="tag"><span> {name}<i onclick="{ parent.removecustomer }" class="icon">&times;</i></span></li> <li> <input type="text" name="newtag" placeholder="eg: Plastic Panda" class="awesomplete"> </li> </ul>', function(opts) {
     var _this = this;
     
     this.awesomplete = new Awesomplete(_this.newtag, {
@@ -133,6 +133,12 @@ riot.tag('tagselect', '<ul> <li each="{customers}" class="tag"><span>{name}</spa
     });
     
     this.customers = [];
+    
+    
+    this.removecustomer = function(e) {
+      this.customers = _.filter(this.customers, function (c) { return c.name !== e.item.name; });
+
+    }.bind(this);
     
     
     this.getTags = function() {
