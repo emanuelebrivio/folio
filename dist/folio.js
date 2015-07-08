@@ -85,6 +85,11 @@ riot.tag('modal', '<button onclick="{ toggle }" class="pure-button modal-toggle"
     }.bind(this);
     
     this.add = function() {
+      if (this.tags.calendar.getDate() == '' || !this.title.value || this.tags.tagselect.getTags().length == 0 || !this.expense.value) {
+        console.log('Missing some fields...');
+        return false;
+      }
+    
       var toadd = {
         id: new Date(),
         date: this.tags.calendar.getDate(),
@@ -93,7 +98,7 @@ riot.tag('modal', '<button onclick="{ toggle }" class="pure-button modal-toggle"
         expense: this.expense.value,
         billed: false
       };
-      
+    
       this.parent.projectslist.push(toadd);
       this.parent.update();
       this.toggle();
@@ -111,7 +116,7 @@ riot.tag('projects', '<tr each="{ projects }"> <td class="date">{ moment(date).f
   
 });
 
-riot.tag('tagselect', '<ul> <li each="{customers}" class="tag"><span>{client}</span></li> <li> <input type="text" name="newtag" placeholder="eg: Plastic Panda"> </li> </ul>', function(opts) {
+riot.tag('tagselect', '<ul> <li each="{customers}" class="tag"><span>{name}</span></li> <li> <input type="text" name="newtag" placeholder="eg: Plastic Panda" class="awesomplete"> </li> </ul>', function(opts) {
     var _this = this;
     
     this.awesomplete = new Awesomplete(_this.newtag, {
@@ -122,7 +127,7 @@ riot.tag('tagselect', '<ul> <li each="{customers}" class="tag"><span>{client}</s
       replace: function(text) {
         console.log(text);
         _this.newtag.value = '';
-        _this.customers.push({ client: text });
+        _this.customers.push({ name: text });
         _this.update();
       }
     });
@@ -131,11 +136,11 @@ riot.tag('tagselect', '<ul> <li each="{customers}" class="tag"><span>{client}</s
     
     
     this.getTags = function() {
-      return [];
+      return this.customers;
     }.bind(this);
     
     this.reset = function() {
-      return;
+      this.customers = [];
     }.bind(this);
   
 });

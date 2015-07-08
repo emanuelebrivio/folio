@@ -1,9 +1,9 @@
 tagselect
   ul
     li.tag(each='{customers}')
-      span {client}
+      span {name}
     li
-      input(type='text', name='newtag', placeholder='eg: Plastic Panda')
+      input.awesomplete(type='text', name='newtag', placeholder='eg: Plastic Panda')
 
   script.
     
@@ -17,7 +17,7 @@ tagselect
       replace: function(text) {
         console.log(text);
         _this.newtag.value = '';
-        _this.customers.push({ client: text });
+        _this.customers.push({ name: text });
         _this.update();
       }
     });
@@ -26,10 +26,10 @@ tagselect
 
 
     getTags() {
-      return [];
+      return this.customers;
     }
     
     reset() {
-      return;
+      this.customers = [];
     }
     

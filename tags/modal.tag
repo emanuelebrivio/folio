@@ -64,6 +64,11 @@ modal
     }
     
     add() {    
+      if (this.tags.calendar.getDate() == '' || !this.title.value || this.tags.tagselect.getTags().length == 0 || !this.expense.value) {
+        console.log('Missing some fields...');
+        return false;
+      }
+
       var toadd = {
         id: new Date(),
         date: this.tags.calendar.getDate(),
@@ -72,7 +77,7 @@ modal
         expense: this.expense.value,
         billed: false
       };
-      
+
       this.parent.projectslist.push(toadd);
       this.parent.update();
       this.toggle();
