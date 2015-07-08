@@ -469,14 +469,36 @@ section#modal
         &.tag
           margin-right 7px
         
-        span
+        & > span
           display block
-          padding 7px 10px
+          padding 7px 28px 7px 10px
           font-size 14px
           font-weight 400
           border-radius 5px
           background #AAA
           color #FFF
+          position relative
+          
+          i.icon
+            position absolute
+            right 7px
+            top 50%
+            display block
+            width 16px
+            font-size 13px
+            height @width
+            margin-top -(@height / 2)
+            border-radius (@width / 2)
+            text-align center
+            line-height @height
+            cursor pointer
+            background darken(@background, 20%)
+            color lighten(@background, 40%)
+            padding 0
+            font-style normal
+            transition background 0.3s ease
+            &:hover
+              background #666
         
         input
           padding 7px
