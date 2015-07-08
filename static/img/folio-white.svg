@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 25.3 11" enable-background="new 0 0 25.3 11" xml:space="preserve">
-<text transform="matrix(1 0 0 1 0 10.2851)" fill="#FFFFFF" font-family="'Giorgio'" font-size="12">folio</text>
+	 viewBox="-128 136.5 25.3 11" style="enable-background:new -128 136.5 25.3 11;" xml:space="preserve">
+<style type="text/css">
+	.st0{enable-background:new    ;}
+	.st1{fill:#FFFFFF;}
+</style>
+<g class="st0">
+	<path class="st1" d="M-125.7,139.1c-0.4,0.4-0.6,1-0.6,1.8v1.2h2.4l-0.3,0.8h-2.2v3.8h-0.8v-5.8c0-1,0.3-1.8,0.9-2.4
+		c0.6-0.6,1.4-0.9,2.4-0.9v0.8C-124.7,138.5-125.3,138.7-125.7,139.1z"/>
+	<path class="st1" d="M-119.9,146.8c-1,0-1.8-0.3-2.4-0.9c-0.6-0.6-0.9-1.4-0.9-2.4c0-1,0.3-1.8,0.9-2.4c0.6-0.6,1.4-0.9,2.4-0.9
+		s1.8,0.3,2.4,0.9c0.6,0.6,0.9,1.4,0.9,2.4c0,1-0.3,1.8-0.9,2.4C-118.1,146.5-118.9,146.8-119.9,146.8z M-119.9,141.1
+		c-0.8,0-1.4,0.2-1.8,0.6s-0.6,1-0.6,1.8c0,0.8,0.2,1.4,0.6,1.8s1,0.6,1.8,0.6c0.8,0,1.4-0.2,1.8-0.6c0.4-0.4,0.6-1,0.6-1.8
+		c0-0.8-0.2-1.4-0.6-1.8C-118.5,141.3-119.1,141.1-119.9,141.1z"/>
+	<path class="st1" d="M-115.1,146.7v-9.3h0.8v9.3H-115.1z"/>
+	<path class="st1" d="M-111.3,137.4v1.1h-0.8v-1.1H-111.3z M-112.1,146.7v-6.4h0.8v6.4H-112.1z"/>
+	<path class="st1" d="M-106.6,146.8c-1,0-1.8-0.3-2.4-0.9s-0.9-1.4-0.9-2.4c0-1,0.3-1.8,0.9-2.4c0.6-0.6,1.4-0.9,2.4-0.9
+		s1.8,0.3,2.4,0.9c0.6,0.6,0.9,1.4,0.9,2.4c0,1-0.3,1.8-0.9,2.4S-105.6,146.8-106.6,146.8z M-106.6,141.1c-0.8,0-1.4,0.2-1.8,0.6
+		s-0.6,1-0.6,1.8c0,0.8,0.2,1.4,0.6,1.8s1,0.6,1.8,0.6c0.8,0,1.4-0.2,1.8-0.6s0.6-1,0.6-1.8c0-0.8-0.2-1.4-0.6-1.8
+		S-105.8,141.1-106.6,141.1z"/>
+</g>
 </svg>
