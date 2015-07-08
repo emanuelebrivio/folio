@@ -29,7 +29,7 @@ folio
       table.pure-table(if='{ hasprojects }')
         thead
           tr
-            th(style='width: 80px;') Date
+            th(style='width: 140px;') Date
             th Title
             th(style='width: 250px;') Customer
             th(style='width: 120px;') Expense

@@ -5,7 +5,7 @@ calendar
     this.pikaday = new Pikaday({
       field: this.datepicker,
       container: this.datepicker,
-      format: 'dddd, DD MMMM YYYY'
+      format: 'ddd, DD MMMM YYYY'
     });
 
     this.pikaday.hide = function() {}

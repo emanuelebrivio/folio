@@ -448,6 +448,38 @@ section#modal
                 color #FFF
                 font-weight 600
                 
+  tagselect
+    ul
+      @extends .sans-font
+      background #F2F2F2
+      border none
+      border-radius 5px
+      box-shadow none
+      width 100%
+      padding 12px 15px
+      margin 0
+      font-size 14px
+      font-weight 400
+      box-sizing border-box
+      list-style none
+      clearfix()
+      li
+        float left
+        white-space nowrap
+        
+        span
+          display block
+          padding 12px 15px
+          font-size 14px
+          font-weight 400
+          border-radius 5px
+          background _accent
+          color #FFF
+          
+        input
+          &:focus
+            background #CCC
+                
                 
 @media all and (max-width: 500px)
   section#table

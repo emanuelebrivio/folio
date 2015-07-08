@@ -18,7 +18,8 @@ modal
             calendar(inputname='date')
 
           .padding
-            input(type='text', name='customers', placeholder='Customers')
+            tagselect
+            
             .spacer-20
             input(type='text', name='title', placeholder='Title')
             .spacer-20
@@ -57,8 +58,8 @@ modal
     
     reset() {
       this.title.value = '';
-      this.customers.value = '';
       this.expense.value = '';
+      this.tags.tagselect.reset();
       this.tags.calendar.reset();
     }
     
@@ -67,9 +68,7 @@ modal
         id: new Date(),
         date: this.tags.calendar.getDate(),
         title: this.title.value,
-        customers: [
-          { name: 'Plastic Panda' }
-        ],
+        customers: this.tags.tagselect.getTags(),
         expense: this.expense.value,
         billed: false
       };

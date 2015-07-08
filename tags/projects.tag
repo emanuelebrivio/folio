@@ -1,12 +1,12 @@
 projects
-  tr(each='{projects}')
-    td.date {date} 
-    td {title}
+  tr(each='{ projects }')
+    td.date { moment(date).format('ddd, DD MMMM YYYY') } 
+    td { title }
     td
-      span.client(data-cli='{name}', each='{customers}', class='{selected: checkStatus}') {name}
-    td {expense}
+      span.client(data-cli='{ name }', each='{ customers }', class='{ selected: checkStatus }') { name }
+    td { expense }
     td
-      .switch(data-id='{id}', class='{billed: billed}', onclick='{parent.toggleBill}')
+      .switch(data-id='{ id }', class='{ billed: billed }', onclick='{ parent.toggleBill }')
         .switch-container
           span
 
