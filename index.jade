@@ -8,8 +8,7 @@ block menuleft
     img(src='static/img/button-logout.svg', width='60', height='60')
 
 block menuright
-  button.pure-button.modal-toggle
-    img(src='static/img/button-add.svg', width='60', height='60')
+  modal
 
 block app
     
@@ -29,144 +28,56 @@ block app
     .container
       .spacer-40
       
-      //-.table-filters.text-right
-        p
-          span View
-          a#view-all.table-filter(title='View all')
-            img(src='static/img/button-viewall.svg', width='31', height='31')
-          a#view-selectedonly.table-filter.table-filter-selected(title='View only selected customers')
-            img(src='static/img/button-viewonly.svg', width='31', height='31')
-      projects
-        //-
+  
+      table.pure-table(if='{hasPrjs}')
+        thead
           tr
-            td.date 17 Jun 
-            td New PC
-            td
-              span.client(data-cli='Plastic Panda') Plastic Panda
-            td € 540,00
-            td
-              .switch(data-id='1')
-                .switch-container
-                  span
-          tr
-            td.date 15 Jun 
-            td Amazon AWS
-            td
-              span.client(data-cli='GSO') GSO
-              span.client(data-cli='UTilia') UTilia
-              span.client(data-cli='Butterfly') Butterfly
-            td € 134,00
-            td
-              .switch(data-id='2')
-                .switch-container
-                  span
-          tr
-            td.date 15 May 
-            td PC for Tools
-            td
-              span.client(data-cli='UTilia') UTilia
-            td € 551,00
-            td
-              .switch.billed(data-id='3')
-                .switch-container
-                  span
+            th(style='width: 80px;') Date
+            th Title
+            th(style='width: 250px;') Customer
+            th(style='width: 120px;') Expense
+            th(style='width: 60px;') Billed
+        
+        tbody(riot-tag='projects')
+      
       .spacer-40
 
-  section#modal
-    .modal
-      header.modal-header
-      
-        .pull-left
-          h1 Add expense
-          
-        .pull-right
-          button.pure-button.modal-toggle
-            img(src='static/img/button-close.svg', width='60', height='60')
-            
-      .modal-body
-        form.pure-form()
-          .padding
-            input#datepicker-input(type='hidden', name='date')
-            #datepicker
-                    
-          .padding
-            input(type='text', name='customers', placeholder='Customers')
-            .spacer-20
-            input(type='text', name='title', placeholder='Title')
-            .spacer-20
-            input(type='text', name='expense', placeholder='Expense')
-            .spacer-20
-            button.primary(type='submit')
-              span Add to list
 
 block scripts
-  script(src='tags/projects.js', type='riot/tag')
+  script(src='dist/projects.js', type='riot/tag')
+  script(src='dist/modal.js', type='riot/tag')
+  script(src='dist/calendar.js', type='riot/tag')
   script.
-    riot.mount(
-      'projects', 
-      { 
-        items: [ 
-          {
-            id: 1,
-            date: new Date(),
-            title: 'New PC',
-            customers: [
-              {name: 'Plastic Panda' }
-            ],
-            expense: 540.00,
-            billed: true
-          }, 
-          {
-            id: 2,
-            date: new Date(),
-            title: 'New Site',
-            customers: [
-              {name: 'UTilia HR'},
-              {name: 'Hitrea'}
-            ],
-            expense: 540.00,
-            billed: false
-          }
-        ] 
-      }
-    );
-
+    var projectslist = [ 
+      {
+        id: 1,
+        date: new Date(),
+        title: 'New PC',
+        customers: [
+          {name: 'Plastic Panda' }
+        ],
+        expense: 540.00,
+        billed: true
+      }, 
+      {
+        id: 2,
+        date: new Date(),
+        title: 'New Site',
+        customers: [
+          {name: 'UTilia HR'},
+          {name: 'Hitrea'}
+        ],
+        expense: 540.00,
+        billed: false
+      }];
+      
+    riot.mount('projects', { items: projectslist });
+    riot.mount('modal', { show: false });
+    
 
   script(src='//cdnjs.cloudflare.com/ajax/libs/chartist/0.8.0/chartist.min.js')
   script.
-    (function () {
-    
-      document.querySelectorAll('#table .switch').on('click', function () {
-        this.classList.toggle('billed');
-        
-        console.log('AJAX request to set new BilledStatus for #' + this.getAttribute('data-id'), this.classList.contains('billed'));
-        console.log('Need also to refresh Chart data');
-        
-      });
-      
-      var modalToggle = document.querySelectorAll('.modal-toggle');
-      
-      if (modalToggle) {
-        modalToggle.on('click', function () {
-        
-          var dataModal = this.getAttribute('data-modal');
-          var modal = document.getElementById('modal');
-          
-          if (dataModal === 'open' || !modal.classList.contains('visible')) {
-            modal.classList.add('visible');
-            setTimeout(function () {
-              modal.classList.add('fadein');
-            }, 5);
-          } else if (dataModal === 'close' || modal.classList.contains('visible')) {
-            modal.classList.remove('fadein');
-            setTimeout(function () {
-              modal.classList.remove('visible');
-            }, 500);
-          }
-          
-        });
-      }
-      
+    (function () {      
       
       /*
       var clients = document.querySelectorAll('#table .client');
