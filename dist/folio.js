@@ -86,7 +86,7 @@ riot.tag('modal', '<button onclick="{ toggle }" class="pure-button modal-toggle"
     this.add = function() {
       if (this.tags.calendar.getDate() == '' || !this.title.value || this.tags.tagselect.getTags().length == 0 || !this.expense.value) {
         console.log('Missing some fields...');
-
+        return false;
       }
     
       var toadd = {

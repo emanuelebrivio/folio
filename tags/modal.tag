@@ -66,7 +66,7 @@ modal
     add() {    
       if (this.tags.calendar.getDate() == '' || !this.title.value || this.tags.tagselect.getTags().length == 0 || !this.expense.value) {
         console.log('Missing some fields...');
-        //return false;
+        return false;
       }
 
       var toadd = {
