@@ -111,7 +111,25 @@ riot.tag('projects', '<tr each="{ projects }"> <td class="date">{ moment(date).f
   
 });
 
-riot.tag('tagselect', '<ul> <li><span>Plastic Panda</span></li> <li> <input type="text" name="newtag"> </li> </ul>', function(opts) {
+riot.tag('tagselect', '<ul> <li each="{customers}" class="tag"><span>{client}</span></li> <li> <input type="text" name="newtag" placeholder="eg: Plastic Panda"> </li> </ul>', function(opts) {
+    var _this = this;
+    
+    this.awesomplete = new Awesomplete(_this.newtag, {
+      list: ['Plastic Panda', 'UTilia', 'Hitrea'],
+      filter: function (text, input) {
+        return Awesomplete.FILTER_CONTAINS(text, input.match(/[^,]*$/)[0]);
+      },
+      replace: function(text) {
+        console.log(text);
+        _this.newtag.value = '';
+        _this.customers.push({ client: text });
+        _this.update();
+      }
+    });
+    
+    this.customers = [];
+    
+    
     this.getTags = function() {
       return [];
     }.bind(this);
