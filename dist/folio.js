@@ -121,7 +121,7 @@ riot.tag('tagselect', '<ul> <li each="{customers}" class="tag"><span> {name}<i o
     var _this = this;
     
     this.awesomplete = new Awesomplete(_this.newtag, {
-      list: ['Plastic Panda', 'UTilia', 'Hitrea'],
+      list: ['Plastic Panda', 'UTilia', 'Hitrea', 'GSO', 'GSO L&C', 'GSO Pod', 'GSO Company'],
       filter: function (text, input) {
         return Awesomplete.FILTER_CONTAINS(text, input.match(/[^,]*$/)[0]);
       },
