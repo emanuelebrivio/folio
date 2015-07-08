@@ -4,15 +4,14 @@ calendar
   script.
     this.pikaday = new Pikaday({
       field: this.datepicker,
-      container: this.datepicker,
-      format: 'ddd, DD MMMM YYYY'
+      container: this.datepicker
     });
 
     this.pikaday.hide = function() {}
     this.pikaday.show();
     
     getDate() {
-      return this.pikaday.toString();
+      return this.pikaday.getDate();
     }
     
     reset() {

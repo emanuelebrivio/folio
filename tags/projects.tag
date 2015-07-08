@@ -1,5 +1,5 @@
 projects
-  tr(each='{ projects }')
+  tr(each='{ projectslist }')
     td.date { moment(date).format('ddd, DD MMMM YYYY') } 
     td { title }
     td
@@ -11,7 +11,7 @@ projects
           span
 
   script.
-    this.projects = opts.items;
+    this.projectslist = opts.items;
 
     toggleBill(e) {
       e.item.billed = !e.item.billed;

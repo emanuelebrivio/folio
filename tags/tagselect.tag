@@ -17,7 +17,6 @@ tagselect
         return Awesomplete.FILTER_CONTAINS(text, input.match(/[^,]*$/)[0]);
       },
       replace: function(text) {
-        console.log(text);
         _this.newtag.value = '';
         _this.customers.push({ name: text });
         _this.update();
@@ -29,9 +28,7 @@ tagselect
 
     removecustomer(e) {
       this.customers = _.filter(this.customers, function (c) { return c.name !== e.item.name; });
-      //this.update();
     }
-
 
     getTags() {
       return this.customers;

@@ -2,15 +2,14 @@
 riot.tag('calendar', '<div name="datepicker" class="pikaday"></div>', function(opts) {
     this.pikaday = new Pikaday({
       field: this.datepicker,
-      container: this.datepicker,
-      format: 'ddd, DD MMMM YYYY'
+      container: this.datepicker
     });
     
     this.pikaday.hide = function() {}
     this.pikaday.show();
     
     this.getDate = function() {
-      return this.pikaday.toString();
+      return this.pikaday.getDate();
     }.bind(this);
     
     this.reset = function() {
@@ -87,7 +86,7 @@ riot.tag('modal', '<button onclick="{ toggle }" class="pure-button modal-toggle"
     this.add = function() {
       if (this.tags.calendar.getDate() == '' || !this.title.value || this.tags.tagselect.getTags().length == 0 || !this.expense.value) {
         console.log('Missing some fields...');
-        return false;
+
       }
     
       var toadd = {
@@ -100,6 +99,8 @@ riot.tag('modal', '<button onclick="{ toggle }" class="pure-button modal-toggle"
       };
     
       this.parent.projectslist.push(toadd);
+      this.parent.projectslist.sort(function(a,b) { return (a.date < b.date) ? 1 : ((b.date < a.date) ? -1 : 0); } );
+      
       this.parent.update();
       this.toggle();
       
@@ -107,8 +108,8 @@ riot.tag('modal', '<button onclick="{ toggle }" class="pure-button modal-toggle"
   
 });
 
-riot.tag('projects', '<tr each="{ projects }"> <td class="date">{ moment(date).format(\'ddd, DD MMMM YYYY\') } </td> <td>{ title }</td> <td><span data-cli="{ name }" each="{ customers }" class="client { selected: checkStatus }">{ name }</span></td> <td>{ expense }</td> <td> <div data-id="{ id }" onclick="{ parent.toggleBill }" class="switch { billed: billed }"> <div class="switch-container"><span></span></div> </div> </td> </tr>', function(opts) {
-    this.projects = opts.items;
+riot.tag('projects', '<tr each="{ projectslist }"> <td class="date">{ moment(date).format(\'ddd, DD MMMM YYYY\') } </td> <td>{ title }</td> <td><span data-cli="{ name }" each="{ customers }" class="client { selected: checkStatus }">{ name }</span></td> <td>{ expense }</td> <td> <div data-id="{ id }" onclick="{ parent.toggleBill }" class="switch { billed: billed }"> <div class="switch-container"><span></span></div> </div> </td> </tr>', function(opts) {
+    this.projectslist = opts.items;
     
     this.toggleBill = function(e) {
       e.item.billed = !e.item.billed;
@@ -125,7 +126,6 @@ riot.tag('tagselect', '<ul> <li each="{customers}" class="tag"><span> {name}<i o
         return Awesomplete.FILTER_CONTAINS(text, input.match(/[^,]*$/)[0]);
       },
       replace: function(text) {
-        console.log(text);
         _this.newtag.value = '';
         _this.customers.push({ name: text });
         _this.update();
@@ -137,9 +137,7 @@ riot.tag('tagselect', '<ul> <li each="{customers}" class="tag"><span> {name}<i o
     
     this.removecustomer = function(e) {
       this.customers = _.filter(this.customers, function (c) { return c.name !== e.item.name; });
-
     }.bind(this);
-    
     
     this.getTags = function() {
       return this.customers;

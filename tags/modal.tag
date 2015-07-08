@@ -66,7 +66,7 @@ modal
     add() {    
       if (this.tags.calendar.getDate() == '' || !this.title.value || this.tags.tagselect.getTags().length == 0 || !this.expense.value) {
         console.log('Missing some fields...');
-        return false;
+        //return false;
       }
 
       var toadd = {
@@ -79,6 +79,8 @@ modal
       };
 
       this.parent.projectslist.push(toadd);
+      this.parent.projectslist.sort(function(a,b) { return (a.date < b.date) ? 1 : ((b.date < a.date) ? -1 : 0); } );
+      
       this.parent.update();
       this.toggle();
       
