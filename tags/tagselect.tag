@@ -1,7 +1,9 @@
 tagselect
   ul
     li.tag(each='{customers}')
-      span {name}
+      span 
+        | {name}
+        i.icon(onclick='{ parent.removecustomer }') &times;
     li
       input.awesomplete(type='text', name='newtag', placeholder='Add client...')
 
@@ -23,6 +25,12 @@ tagselect
     });
 
     this.customers = [];
+
+
+    removecustomer(e) {
+      this.customers = _.filter(this.customers, function (c) { return c.name !== e.item.name; });
+      //this.update();
+    }
 
 
     getTags() {
