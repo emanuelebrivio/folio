@@ -1,5 +1,4 @@
 projects
-
   tr(each='{projects}')
     td.date {date} 
     td {title}

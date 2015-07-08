@@ -1,178 +1,59 @@
-extends layout
-
-block afterhead
-  link(rel='stylesheet', type='text/css', href='//cdnjs.cloudflare.com/ajax/libs/chartist/0.8.0/chartist.min.css')
-
-block menuleft
-  button.pure-button
-    img(src='static/img/button-logout.svg', width='60', height='60')
-
-block menuright
-  modal
-
-block app
+doctype html
+html
+  head
+    title Folio
     
-  section#chart
-    .container
-      .ct-summary
-        p: strong Expense Summary
-      .ct-chart.ct-area
-      .spacer-20
-      .ct-legends.text-center
-        .ct-legend.ct-legend-0
-        span Total expense
-        .ct-legend.ct-legend-1
-        span Billed
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet', href='//cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/pure-min.css')
+    link(rel='stylesheet', href='//cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/grids-responsive-min.css')
+    link(rel='stylesheet', href='static/css/style.css')
+    link(rel='shortcut icon', href='static/img/folio-favicon.png', type='image/png')
+    link(rel='stylesheet', type='text/css', href='//cdnjs.cloudflare.com/ajax/libs/chartist/0.8.0/chartist.min.css')
 
-  section#table
-    .container
-      .spacer-40
-      
-  
-      table.pure-table(if='{hasPrjs}')
-        thead
-          tr
-            th(style='width: 80px;') Date
-            th Title
-            th(style='width: 250px;') Customer
-            th(style='width: 120px;') Expense
-            th(style='width: 60px;') Billed
-        
-        tbody(riot-tag='projects')
-      
-      .spacer-40
-
-
-block scripts
-  script(src='dist/projects.js', type='riot/tag')
-  script(src='dist/modal.js', type='riot/tag')
-  script(src='dist/calendar.js', type='riot/tag')
-  script.
-    var projectslist = [ 
-      {
-        id: 1,
-        date: new Date(),
-        title: 'New PC',
-        customers: [
-          {name: 'Plastic Panda' }
-        ],
-        expense: 540.00,
-        billed: true
-      }, 
-      {
-        id: 2,
-        date: new Date(),
-        title: 'New Site',
-        customers: [
-          {name: 'UTilia HR'},
-          {name: 'Hitrea'}
-        ],
-        expense: 540.00,
-        billed: false
-      }];
-      
-    riot.mount('projects', { items: projectslist });
-    riot.mount('modal', { show: false });
+  body
     
+    folio
 
-  script(src='//cdnjs.cloudflare.com/ajax/libs/chartist/0.8.0/chartist.min.js')
-  script.
-    (function () {      
-      
-      /*
-      var clients = document.querySelectorAll('#table .client');
-      if (clients) {
-      
-        clients.on('click', function (e) {
-          var ctrlKey = e.ctrlKey || e.shiftKey;
-          var me = this.getAttribute('data-cli');
-          var wasSelected = this.classList.contains('selected');  
-          
-          if (!ctrlKey) {
-            document.querySelectorAll('#table .client.selected').forEach(function (c) {
-              c.classList.remove('selected');
-            });
-          }
-          
-          if (!wasSelected) {
-            document.querySelectorAll('#table .client[data-cli="' + me + '"]').forEach(function (c) {
-              c.classList.add('selected');
-            });
-          } else if (ctrlKey) {
-            document.querySelectorAll('#table .client[data-cli="' + me + '"]').forEach(function (c) {
-              c.classList.remove('selected');
-            });
-          }
-          
-          filterTable();
-          
-        });
-      
-      }
-      
-      
-      var filterTable = function () {
-      
-        if (document.querySelectorAll('#table tbody tr .selected').length > 0) {
-          document.querySelectorAll('#table tbody tr').forEach(function (tr) {
+    script(src='//cdnjs.cloudflare.com/ajax/libs/riot/2.2.1/riot+compiler.min.js')
+    script(src='//javaspritz.com/cdn/dom.polyfill.min.js')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js')
+    script(src='static/js/pikaday.js')
+    
+    script(src='dist/folio.js', type='riot/tag')
+    script.
+      riot.mount('folio');
 
-            if (tr.querySelectorAll('.client.selected').length === 0) {
-              tr.classList.add('fadeout');
-            } else {
-              tr.classList.remove('fadeout');
+
+    script(src='//cdnjs.cloudflare.com/ajax/libs/chartist/0.8.0/chartist.min.js')
+    script.
+      (function () {
+
+        /*new Chartist.Line('.ct-chart.ct-area', {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+          series: [
+            ['470', '870', '52', '500', '212', '334'],
+            ['470', '690', '52', '500', '50', '0']
+          ]
+        }, {
+          low: 0,
+          showArea: true,
+          showLine: false,
+          showPoint: false,
+          fullWidth: true,
+          lineSmooth: Chartist.Interpolation.simple({
+            divisor: 20
+          }),
+          axisX: {
+            showGrid: false
+          },
+          axisY: {
+            showLabel: false,
+            offset: 0,
+            labelInterpolationFnc: function (value) {
+              return '€ ' + value;
             }
-
-          });
-        } else {
-          document.querySelectorAll('#table tbody tr').forEach(function (tr) {
-            tr.classList.remove('fadeout');
-          });
-        }
-      
-      };
-      */
-      
-      
-      new Chartist.Line('.ct-chart.ct-area', {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-        series: [
-          ['470', '870', '52', '500', '212', '334'],
-          ['470', '690', '52', '500', '50', '0']
-        ]
-      }, {
-        low: 0,
-        showArea: true,
-        showLine: false,
-        showPoint: false,
-        fullWidth: true,
-        lineSmooth: Chartist.Interpolation.simple({
-          divisor: 20
-        }),
-        axisX: {
-          showGrid: false
-        },
-        axisY: {
-          showLabel: false,
-          offset: 0,
-          labelInterpolationFnc: function (value) {
-            return '€ ' + value;
           }
-        }
-      });
-      
-      
-      
-      var dateInput = document.getElementById('datepicker-input');
-      var datePicker = new Pikaday({
-        field: document.getElementById('datepicker'),
-        container: document.getElementById('datepicker'),
-        //format: 'dddd, DD MMMM YYYY',
-        onSelect: function(date) {
-            dateInput.value = datePicker.toString();
-        },
-      });
-      datePicker.hide = function() {/*noop*/}
-      datePicker.show();
-      
-      
-    })();
+        });*/
+
+      })();

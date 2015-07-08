@@ -15,7 +15,7 @@ modal
       .modal-body
         form.pure-form(onsubmit='{ add }')
           .padding
-            calendar
+            calendar(inputname='date')
 
           .padding
             input(type='text', name='customers', placeholder='Customers')
@@ -31,7 +31,7 @@ modal
     this.visibility = opts.show;
     this.fading = opts.show;
     
-    toggle(e) {
+    toggle() {
       if (this.visibility) {
         // Hide
         this.fading = false;
@@ -54,20 +54,20 @@ modal
       }
     }
     
-    add(e) {
+    add(e) {    
       var toadd = {
         id: new Date(),
-        date: new Date(),
-        title: this.title,
+        date: this.tags.calendar.getDate(),
+        title: this.title.value,
         customers: [
           { name: 'Plastic Panda' }
         ],
-        expense: this.expense,
+        expense: this.expense.value,
         billed: false
       };
       
-      //parent.projects.push(toadd);
-      
-      console.log(parent.projects);
+      this.parent.projectslist.push(toadd);
+      this.parent.update();
+      this.toggle();
       
     }
