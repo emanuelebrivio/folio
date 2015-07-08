@@ -3,7 +3,7 @@ tagselect
     li.tag(each='{customers}')
       span {name}
     li
-      input.awesomplete(type='text', name='newtag', placeholder='eg: Plastic Panda')
+      input.awesomplete(type='text', name='newtag', placeholder='Add client...')
 
   script.
     

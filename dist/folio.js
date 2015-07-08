@@ -116,7 +116,7 @@ riot.tag('projects', '<tr each="{ projects }"> <td class="date">{ moment(date).f
   
 });
 
-riot.tag('tagselect', '<ul> <li each="{customers}" class="tag"><span>{name}</span></li> <li> <input type="text" name="newtag" placeholder="eg: Plastic Panda" class="awesomplete"> </li> </ul>', function(opts) {
+riot.tag('tagselect', '<ul> <li each="{customers}" class="tag"><span>{name}</span></li> <li> <input type="text" name="newtag" placeholder="Add client..." class="awesomplete"> </li> </ul>', function(opts) {
     var _this = this;
     
     this.awesomplete = new Awesomplete(_this.newtag, {
